@@ -1,0 +1,19 @@
+<h2><%= @pizza_place.name %></h2>
+  <div><%= @pizza_place.average_score.to_s %></div>
+  <%= form_tag("/#{@pizza_place.id}", method: "get") do %>
+    <%= label_tag(:q, "Review Count:") %>
+    <%= select("review", "limit", [1,2,3,4,5,6,7,8,9], {include_blank: false, :selected => params[:review].try(:[], :limit) || 9}) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+<p>
+  <% @pizza_place_reviews.each do |review| %>
+    <div>
+      <span><%= review.name %></span>
+      <span><%= review.location %></span>
+      <span><%= review.rating %></span>
+      <span><%= review.review %></span>
+      <span><%= review.date %></span>
+      <span><%= review.image ? image_tag(review.image) : nil %></span>
+    </div>
+  <% end %>
+</p>

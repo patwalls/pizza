@@ -1,0 +1,14 @@
+<h2>Pizza</h2>
+<p>
+  <%= form_tag("/", method: "get") do %>
+    <%= label_tag(:q, "Search for:") %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+
+  <ul>
+    <% @results.each do |result| %>
+      <li> <%= link_to result['name'], "/#{result['id']}" %></li>
+    <% end %>
+  </ul>
+</p>
