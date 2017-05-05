@@ -6,7 +6,7 @@
     <%= submit_tag("Search") %>
   <% end %>
 <p>
-  <% @pizza_place_reviews.each do |review| %>
+  <% @pizza_place.reviews.each do |review| %>
     <div>
       <span><%= review.name %></span>
       <span><%= review.location %></span>
