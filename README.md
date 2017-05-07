@@ -1,24 +1,16 @@
-# README
+# NYC Pizza
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Live Demo:
 
-Things you may want to cover:
+http://diaandpizza.herokuapp.com
 
-* Ruby version
+Styling stolen from: http://jgthms.com/web-design-in-4-minutes/
 
-* System dependencies
+### Installation:
 
-* Configuration
+1. `bundle install`
+2. `rake db:create`
+3. `rails s`
+4. Navigate browser to localhost:3000
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Run tests: `rake test`
