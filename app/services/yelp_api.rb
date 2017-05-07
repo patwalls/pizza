@@ -1,7 +1,25 @@
 class YelpApi
+  def self.biz_search(query, options = {})
+    search_path = "businesses/search?term=#{query}"
+    search_path += "&location=#{options[:location]}" if options[:location]
+    search_path += "&category_filter=#{options[:category]}" if options[:category]
+
+    response = get(search_path)
+    OpenStruct.new(response).businesses if response
+  end
+
+  def self.business(id)
+    response = get("businesses/#{id}")
+    OpenStruct.new(response) if response
+  end
+
   def self.get(url)
-    response = ::RestClient.get("https://api.yelp.com/v3/#{url}", headers = authorization_header).body
-    JSON.parse(response) if response
+    begin
+      response = ::RestClient.get("https://api.yelp.com/v3/#{url}", headers = authorization_header)
+    rescue RestClient::ExceptionWithResponse => e
+      e.response
+    end
+    JSON.parse(response.body) unless e
   end
 
   def self.authorization_header

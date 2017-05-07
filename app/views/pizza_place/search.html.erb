@@ -1,14 +1,25 @@
-<h2>Pizza</h2>
-<p>
-  <%= form_tag("/", method: "get") do %>
-    <%= label_tag(:q, "Search for:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-
-  <ul>
+<header>
+  <h1>New York Pizza</h1>
+</header>
+<div>
+  <div class='search'>
+    <h2>
+      <%= form_tag("/", method: "get") do %>
+        <%= label_tag(:q, "Search for a pizza joint in NYC:") %>
+        <%= text_field_tag(:q) %>
+        <%= submit_tag("Search") %>
+      <% end %>
+    </h2>
+  </div>
+  <br/>
+  <div>
     <% @results.each do |result| %>
-      <li> <%= link_to result['name'], "/#{result['id']}" %></li>
+      <div class='pre pizza-joint'>
+        <span><%= link_to result['name'], "/#{result['id']}" %></span>
+        <span><%= result['rating'] %> stars from <%= result['review_count'] %> reviews </span>
+        <span><%= result['categories'].first['title'] %></span>
+        <span><%= result['location']['address1'] %></span>
+      </div>
     <% end %>
-  </ul>
-</p>
+  </div>
+</div>

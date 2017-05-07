@@ -1,19 +1,29 @@
-<h2><%= @pizza_place.name %></h2>
-  <div><%= @pizza_place.average_score.to_s %></div>
+<%= link_to 'Back', "/" %>
+<header>
+  <h1><%= @pizza_place.yelp_metadata.name %></h1>
+  <h3><%= @pizza_place.average_score.to_s %> average stars from last <%= @pizza_place.reviews.count %> reviews.</h3>
+</header>
+<div class='heading'>
+  <h4>Reviews:</h4>
   <%= form_tag("/#{@pizza_place.id}", method: "get") do %>
-    <%= label_tag(:q, "Review Count:") %>
+    <%= label_tag(:q, "Showing last ") %>
     <%= select("review", "limit", [1,2,3,4,5,6,7,8,9], {include_blank: false, :selected => params[:review].try(:[], :limit) || 9}) %>
-    <%= submit_tag("Search") %>
+    <%= 'reviews' %>
+    <%= submit_tag("Refresh") %>
   <% end %>
-<p>
-  <% @pizza_place.reviews.each do |review| %>
-    <div>
-      <span><%= review.name %></span>
-      <span><%= review.location %></span>
-      <span><%= review.rating %></span>
-      <span><%= review.review %></span>
-      <span><%= review.date %></span>
-      <span><%= review.image ? image_tag(review.image) : nil %></span>
+</div>
+<% @pizza_place.reviews.each do |review| %>
+  <div class='pre'>
+    <div class='review-top'>
+      <div class='review-top-info'>
+        <span><%= review.name %></span>
+        <span><%= review.location %></span>
+        <span><%= review.date %></span>
+      </div>
+      <div><%= review.image ? image_tag(review.image) : nil %></div>
     </div>
-  <% end %>
-</p>
+    <br/>
+    <div><strong><%= review.rating %> stars</strong></div>
+    <div><%= review.review %></div>
+  </div>
+<% end %>
