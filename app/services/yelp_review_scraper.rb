@@ -17,7 +17,7 @@ class YelpReviewScraper
     begin
       parse_xml
     rescue => e
-      # do nothing
+      # we cant access the page or something went wrong
     end
   end
 
@@ -37,7 +37,7 @@ class YelpReviewScraper
   end
 
   def get_name(review)
-    review.css(".user-name").text.strip
+    review.css(".user-name").text.try(:strip)
   end
 
   def get_img(review)
@@ -46,11 +46,11 @@ class YelpReviewScraper
   end
 
   def get_location(review)
-    review.css(".user-location").text.strip
+    review.css(".user-location").text.try(:strip)
   end
 
   def get_date(review)
-    review.css(".rating-qualifier").text.strip
+    review.css(".rating-qualifier").text.try(:strip)
   end
 
   def get_rating(review)
